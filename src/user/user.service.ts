@@ -8,6 +8,14 @@ export class UserService {
   @Inject()
   private readonly prisma: PrismaService
 
+  async allUsers(
+    where?: Prisma.UserWhereInput,
+  ): Promise<User[]> { 
+    return this.prisma.user.findMany({
+      where, 
+    });
+  }
+
   async user(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
   ): Promise<User | null> {
