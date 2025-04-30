@@ -1,98 +1,167 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Forum Project API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API RESTful para um sistema de fórum de perguntas e respostas, desenvolvida com [NestJS](https://nestjs.com/) e [Prisma ORM](https://www.prisma.io/), com suporte a autenticação, usuários, perguntas e respostas. O banco de dados utilizado é o PostgreSQL, acessível localmente ou via Docker.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🧾 Funcionalidades
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Cadastro e autenticação de usuários com JWT
+- Criação de perguntas e respostas
+- Relacionamentos entre usuários, perguntas e respostas
+- Validações com [`class-validator`](https://github.com/typestack/class-validator)
+- Documentação automática da API com [`Swagger`](https://swagger.io/) via NestJS
+- Integração com Prisma ORM
+- Suporte a Docker e Docker Compose
 
-## Project setup
+---
 
-```bash
-$ npm install
-```
+## 🧱 Tecnologias
 
-## Compile and run the project
+- **NestJS** (estrutura do projeto)
+- **Prisma ORM** (acesso ao banco de dados)
+- **PostgreSQL** (persistência dos dados)
+- **JWT** (autenticação)
+- **Docker** (ambiente de execução)
+- **Swagger** (documentação de API)
+- **class-validator** (validações de DTOs)
+- **TypeScript**
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
+## 📦 Instalação sem Docker
 
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
+### 1. Clone o projeto
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/kewensilva-gif/forum_project_api
+cd forum_project_api
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2. Instale as dependências
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 3. Configure o ambiente
 
-## Resources
+Crie um arquivo `.env` na raiz com o seguinte conteúdo:
 
-Check out a few resources that may come in handy when working with NestJS:
+```env
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/forum_db?schema=public"
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+> Certifique-se de que o PostgreSQL esteja rodando localmente e o banco `forum_db` exista.
 
-## Support
+### 4. Rode as migrações e gere o cliente do Prisma
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npx prisma migrate dev --name init
+npx prisma generate
+```
 
-## Stay in touch
+### 5. Inicie o servidor
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+npm run start:dev
+```
 
-## License
+A API estará disponível em:  
+📍 `http://localhost:3000`
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+A documentação Swagger estará em:  
+📘 `http://localhost:3000/api`
+
+---
+
+## 🐳 Instalação com Docker
+
+### 1. Configure seu `.env`
+
+```env
+DATABASE_URL="postgresql://postgres:postgres@db:5432/forum_db?schema=public"
+```
+
+### 2. Execute os containers
+
+```bash
+docker compose up --build
+```
+
+- API: `http://localhost:4000`
+- Swagger: `http://localhost:4000/api`
+- PostgreSQL: `localhost:5432`
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+src/
+├── auth/             # Módulo de autenticação (login/registro com JWT)
+├── users/            # Módulo de usuários
+├── questions/        # Módulo de perguntas
+├── answers/          # Módulo de respostas
+├── main.ts           # Ponto de entrada
+```
+
+---
+
+## 🔍 Scripts úteis
+
+```bash
+npm run start           # Inicia a aplicação
+npm run start:dev       # Inicia em modo de desenvolvimento
+npm run build           # Compila o projeto
+npm run format          # Formata o código
+npm run test            # Executa os testes unitários
+```
+
+---
+
+## 🛠 Requisitos
+
+- Node.js >= 20
+- PostgreSQL (se rodar localmente)
+- Docker (se preferir containerizar)
+
+---
+
+## 📚 Prisma
+
+Alguns comandos úteis:
+
+```bash
+npx prisma generate          # Gera cliente Prisma
+npx prisma migrate dev       # Executa migrações no banco local
+npx prisma studio            # Abre interface visual do Prisma
+```
+
+---
+
+## 📖 Swagger
+
+Após iniciar o projeto, acesse a documentação da API interativa via Swagger em:
+
+```
+http://localhost:3000/api
+```
+
+Se estiver usando Docker:
+
+```
+http://localhost:4000/api
+```
+
+---
+
+## ✍️ Licença
+
+Distribuído sob a licença [MIT](./LICENSE). Veja `LICENSE` para mais informações.
+
+---
+
+## 🤝 Contribuições
+
+Pull requests são bem-vindos. Para grandes mudanças, por favor abra uma issue primeiro para discutir o que você gostaria de mudar.
