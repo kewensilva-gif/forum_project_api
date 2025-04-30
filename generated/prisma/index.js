@@ -84,6 +84,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -117,6 +120,11 @@ exports.Prisma.AnswersScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -168,17 +176,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:.forum.db"
+        "value": "postgresql://postgres:1234@localhost:5432/forum_db?schema=public"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int         @id @default(autoincrement())\n  email     String      @unique\n  name      String?\n  password  String\n  createdAt DateTime    @default(now())\n  updatedAt DateTime    @updatedAt\n  questions Questions[]\n  answers   Answers[]\n}\n\nmodel Questions {\n  id        Int       @id @default(autoincrement())\n  title     String\n  body      String\n  userId    Int\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  user      User      @relation(fields: [userId], references: [id])\n  answers   Answers[]\n}\n\nmodel Answers {\n  id         Int       @id @default(autoincrement())\n  body       String\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  userId     Int\n  questionId Int\n  user       User      @relation(fields: [userId], references: [id])\n  question   Questions @relation(fields: [questionId], references: [id])\n}\n",
-  "inlineSchemaHash": "9954ada203451a08c6884c167df693a21d6eb5c7bd9d88d5649e9148317c9979",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgres\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int         @id @default(autoincrement())\n  email     String      @unique\n  name      String?\n  password  String\n  createdAt DateTime    @default(now())\n  updatedAt DateTime    @updatedAt\n  questions Questions[]\n  answers   Answers[]\n}\n\nmodel Questions {\n  id        Int       @id @default(autoincrement())\n  title     String\n  body      String\n  userId    Int\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  user      User      @relation(fields: [userId], references: [id])\n  answers   Answers[]\n}\n\nmodel Answers {\n  id         Int       @id @default(autoincrement())\n  body       String\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  userId     Int\n  questionId Int\n  user       User      @relation(fields: [userId], references: [id])\n  question   Questions @relation(fields: [questionId], references: [id])\n}\n",
+  "inlineSchemaHash": "73a3d6d442651505dddc05d05abd76314328167a7d1f38345e34629761f33c9d",
   "copyEngine": true
 }
 
