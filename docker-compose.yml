@@ -22,7 +22,7 @@ services:
     ports:
       - "4000:3000"
     environment:
-      - DATABASE_URL=postgresql://postgres:1234@db:5432/forum_db?schema=public
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/forum_db
     command: sh -c "npx prisma migrate deploy && npm run start:prod"
 
 volumes:
