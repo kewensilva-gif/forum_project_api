@@ -134,6 +134,7 @@ exports.Prisma.QuestionsScalarFieldEnum = {
 
 exports.Prisma.AnswersScalarFieldEnum = {
   id: 'id',
+  body: 'body',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId',
